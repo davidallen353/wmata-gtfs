@@ -1,4 +1,5 @@
 from ..utilities import get_gtfs_rt_data
+from ..alerts import get_rail_alerts
 
 from logging import getLogger
 
