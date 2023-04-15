@@ -1,4 +1,5 @@
-"""This module provides functions for interacting with the Washington Metropolitan Area Transit Authority (WMATA) API to retrieve information on WMATA's rail system.
+"""This module provides functions for interacting with the Washington Metropolitan Area
+    Transit Authority (WMATA) API to retrieve information on WMATA's rail system.
 
 Functions:
 - get_lines_data(API_KEY: str) -> dict: Get rail lines JSON data.
@@ -123,7 +124,8 @@ def get_station_entrances(
         URL = "/Rail.svc/json/jStationEntrances?"
     else:
         logger.info(
-            f"Getting station entrances near {LATITUDE_DEG}, {LONGITUDE_DEG} radius {RADIUS_M}m"
+            f"Getting station entrances near {LATITUDE_DEG}, {LONGITUDE_DEG}"
+            + f" radius {RADIUS_M}m"
         )
         params = urllib.parse.urlencode(
             {

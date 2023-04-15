@@ -11,18 +11,22 @@ def get_gtfs_rt_data(
     API_KEY: str, URL: str, function_desc: str = "Get generic GTFS RT data"
 ) -> dict:
     """
-    Retrieves GTFS Real-Time data from WMATA's API using a GET request with the provided API key and URL.
+    Retrieves GTFS Real-Time data from WMATA's API using a GET request with the provided
+    API key and URL.
 
     Args:
         API_KEY (str): The API key to use for authentication.
         URL (str): The URL of the GTFS Real-Time API endpoint to retrieve data from.
-        function_desc (str, optional): A description of the function being performed. Defaults to "Get generic GTFS RT data".
+        function_desc (str, optional): A description of the function being performed.
+            Defaults to "Get generic GTFS RT data".
 
     Returns:
-        dict: A dictionary containing the GTFS Real-Time data returned by the API, converted from the protobuf format.
+        dict: A dictionary containing the GTFS Real-Time data returned by the API,
+            converted from the protobuf format.
 
     Raises:
-        Warning: If the function fails to retrieve the GTFS Real-Time data from the API, or if there is an error converting the data from protobuf to a dictionary.
+        Warning: If the function fails to retrieve the GTFS Real-Time data from the API,
+            or if there is an error converting the data from protobuf to a dictionary.
 
     """
     headers = {
@@ -54,12 +58,14 @@ def get_json_data(
     API_KEY: str, URL: str, function_desc: str = "Get generic GTFS RT data"
 ) -> dict:
     """
-    Retrieves JSON data from WMATA's API using a GET request with the provided API key and URL.
+    Retrieves JSON data from WMATA's API using a GET request with the provided API key
+    and URL.
 
     Args:
         API_KEY (str): The API key to use for authentication.
         URL (str): The URL of the API endpoint to retrieve data from.
-        function_desc (str, optional): A description of the function being performed. Defaults to "Get generic GTFS RT data".
+        function_desc (str, optional): A description of the function being performed.
+            Defaults to "Get generic GTFS RT data".
 
     Returns:
         dict: A dictionary containing the JSON data returned by the API.
