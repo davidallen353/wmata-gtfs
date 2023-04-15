@@ -5,8 +5,10 @@ Functions:
 
 get_rail_rt_vehicle_positions(API_KEY: str) -> dict: Retrieves real-time vehicle position data for Metro rail trains.
 get_rail_rt_trip_updates(API_KEY: str) -> dict: Retrieves real-time trip update data for Metro rail trains.
+
 Usage:
 To use these functions, import them from the module and provide the necessary API key as an argument:
+
 Example:
 from wmata.realtime.rail import get_rail_rt_vehicle_positions
 vehicle_positions_data = get_rail_rt_vehicle_positions(API_KEY)
