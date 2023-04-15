@@ -1,3 +1,19 @@
+"""
+This module provides functions to retrieve real-time vehicle position and trip update data for Metro rail trains from WMATA's API using a provided API key.
+
+Functions:
+
+get_rail_rt_vehicle_positions(API_KEY: str) -> dict: Retrieves real-time vehicle position data for Metro rail trains.
+get_rail_rt_trip_updates(API_KEY: str) -> dict: Retrieves real-time trip update data for Metro rail trains.
+Usage:
+To use these functions, import them from the module and provide the necessary API key as an argument:
+Example:
+from wmata.realtime.rail import get_rail_rt_vehicle_positions
+vehicle_positions_data = get_rail_rt_vehicle_positions(API_KEY)
+
+Raises:
+Warning: If the functions fail to retrieve the real-time data from the API, or if there is an error converting the data from protobuf to a dictionary.
+"""
 from ..utilities import get_gtfs_rt_data
 from ..alerts import get_rail_alerts
 
