@@ -1,110 +1,76 @@
-import requests
-import json
+from wmata import alerts
+from wmata.rail import gtfs_rt as rail_gtfs
+from wmata.rail import station_info
 
-import http.client, urllib.request, urllib.parse, urllib.error, base64
-import gtfs_realtime_pb2
-from google.protobuf.json_format import MessageToDict, MessageToJson
+from time import sleep
 
 # Load API Key
 
 with open("parts/wmata_api_key") as f:
     api_key = f.read().strip()
-    print(api_key)
 
+rail_alerts = alerts.get_rail_alerts(api_key)
+bus_alerts = alerts.get_bus_alerts(api_key)
 
-headers = {
-    # Request headers
-    'api_key': api_key,}
+sleep(1)
+train_positions = rail_gtfs.get_rail_rt_vehicle_positions(api_key)
+train_trip_updates = rail_gtfs.get_rail_rt_trip_updates(api_key)
 
-params = urllib.parse.urlencode({})
+sleep(1)
+rail_lines = station_info.get_lines_data(api_key)
+rail_parking = station_info.get_parking_data(api_key, "F06")
+rail_path_between_stations = station_info.get_path_between_stations(
+    api_key, "K08", "C05"
+)
+rail_station_entrances_all = station_info.get_station_entrances(api_key)
+rail_station_entrances_example = station_info.get_station_entrances(
+    api_key, LATITUDE_DEG=38.8978168, LONGITUDE_DEG=-77.0404246, RADIUS_M=500.0
+)
 
-try:
-    conn = http.client.HTTPSConnection('api.wmata.com')
-    conn.request("GET", "/gtfs/rail-gtfsrt-alerts.pb?%s" % params, "{body}", headers)
-    response = conn.getresponse()
-    data = response.read()
-    conn.close()
+sleep(1)
+rail_station_info_ex = station_info.get_station_info(api_key, "C01")
+rail_station_list = station_info.get_station_list(api_key, "OR")
+rail_station_timing = station_info.get_station_timing(api_key, "K08")
 
-    print(" ")
-    feed = gtfs_realtime_pb2.FeedMessage()
-    feed.ParseFromString(data)
+# rail_station2station_all = rail_station_info.get_station2station_info(api_key)
+rail_station2station = station_info.get_station2station_info(api_key, "K08", "C05")
 
-    data_as_dict = MessageToDict(feed)
-    # print(data_as_dict)
+# print("==================")
+# print(rail_alerts)
 
-    for _entity  in data_as_dict["entity"]:
-        for _idx in _entity:
-            print(_idx)
-            
-            if type(_entity[_idx]) == dict:
-                print(_entity[_idx])
-                print(_entity[_idx]["informedEntity"])
-            print("----")
+# print("==================")
+# print(bus_alerts)
 
-    # for entity in feed.entity:
-    #     print(entity.alert)
-    #     print(type(entity))
-    #     print("-------")
+# print("==================")
+# print(train_positions)
 
-except Exception as e:
-    print("[Errno {0}] {1}".format(e.errno, e.strerror))
+# print("==================")
+# print(train_trip_updates)
 
-####################################
+# print("==================")
+# print(rail_lines)
 
-# # Define the API endpoint and parameters
-# endpoint = "https://api.wmata.com/StationPrediction.svc/json/GetPrediction/All"
-# params = {"api_key": api_key, "StationCode": "A01"}
+# print("==================")
+# print(rail_parking)
 
-# # Make the API request
-# response = requests.get(endpoint, params=params)
+print("==================")
+print(rail_path_between_stations)
 
-# # Parse the JSON response
-# data = json.loads(response.text)
+# print("==================")
+# print(rail_station_entrances_all)
 
-# # Print the results
-# for train in data["Trains"]:
-#     print(f"Destination: {train['DestinationName']}")
-#     print(f"Line: {train['Line']}")
-#     print(f"Arrival time: {train['Min']}")
-#     print()
+# print("==================")
+# print(rail_station_entrances_example)
 
-# # Make the API request
-# endpoint = "https://api.wmata.com/Rail.svc/json/jStations"
-# response = requests.get(endpoint, params=params)
+# print("==================")
+# print(rail_station_info_ex)
 
-# # Parse the JSON response
-# data = json.loads(response.text)
-# print(data)
-# # Extract the station codes
-# station_codes = []
-# for station in data["Stations"]:
-#     station_codes.append(station["Code"])
-
-# # Print the station codes
-# print(station_codes)
-
-
-# ########### Python 3.2 #############
-# import http.client, urllib.request, urllib.parse, urllib.error, base64
-
-# headers = {
-#     # Request headers
-#     'api_key': api_key,
-# }
-
-# params = urllib.parse.urlencode({
-# })
-
-# try:
-#     conn = http.client.HTTPSConnection('api.wmata.com')
-#     conn.request("GET", "/gtfs/rail-gtfs-static.zip?%s" % params, "{body}", headers)
-#     response = conn.getresponse()
-#     data = response.read()
-#     with open("bus_data.zip", "wb") as f:
-#         f.write(data)
-#     conn.close()
-# except Exception as e:
-#     print("[Errno {0}] {1}".format(e.errno, e.strerror))
-
-# ####################################
-
+# print("==================")
+# print(rail_station_list)
+# print("==================")
+# print(rail_station_timing)
+# print("==================")
+# print(rail_station2station_all)
+print("==================")
+print(rail_station2station)
+print("==================")
