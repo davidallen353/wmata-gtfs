@@ -128,8 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-wmata/data/bus_gtfs_static/*
-wmata/data/rail_gtfs_static/*
-wmata/data/bus_gtfs_static.zip
-wmata/data/rail_gtfs_static.zip
+wmata2/data/bus_gtfs_static/*
+wmata2/data/rail_gtfs_static/*
+wmata2/data/bus_gtfs_static.zip
+wmata2/data/rail_gtfs_static.zip
 .DS_Store

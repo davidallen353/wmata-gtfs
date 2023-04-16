@@ -1,7 +1,9 @@
-from wmata import alerts
-from wmata.rail import gtfs_rt as rail_gtfs
-from wmata.rail import station_info
-from wmata.rail import predictions
+from wmata2 import alerts
+from wmata2.rail import gtfs_rt as rail_gtfs
+from wmata2.rail import station_info
+from wmata2.rail import predictions
+from wmata2.rail import positions
+from wmata2.utilities import get_station_code, get_station_name
 
 from time import sleep
 
@@ -34,10 +36,14 @@ with open("parts/wmata_api_key") as f:
 # rail_station_timing = station_info.get_station_timing(api_key, "K08")
 
 # # rail_station2station_all = rail_station_info.get_station2station_info(api_key)
-# rail_station2station = station_info.get_station2station_info(api_key, "K08", "C05")
+rail_station2station = station_info.get_station2station_info(api_key, "K08", "C08")
 
-predict_all = predictions.get_next_trains(api_key)
-predict_ex = predictions.get_next_trains(api_key, STATION_CODE="F03")
+# predict_all = predictions.get_next_trains(api_key)
+predict_ex = predictions.get_next_trains(api_key, STATION_CODE="K08")
+
+# live_train_pos = positions.get_live_trains_positions(api_key)
+# standard_routes = positions.get_standard_routes(api_key)
+# track_circuits = positions.get_track_circuits(api_key)
 
 # print("==================")
 # print(rail_alerts)
@@ -69,7 +75,6 @@ predict_ex = predictions.get_next_trains(api_key, STATION_CODE="F03")
 # print("==================")
 # print(rail_station_info_ex)
 
-
 # print("==================")
 # print(rail_station_list)
 
@@ -79,8 +84,29 @@ predict_ex = predictions.get_next_trains(api_key, STATION_CODE="F03")
 # print("==================")
 # print(rail_station2station_all)
 
-# print("==================")
-# print(rail_station2station)
 print("==================")
-print(predict_all)
+print(rail_station2station)
+
+# print("==================")
+# print(predict_all)
+
+print("==================")
 print(predict_ex)
+
+# print("==================")
+# print(live_train_pos)
+
+# print("==================")
+# print(standard_routes)
+
+# print("==================")
+# print(track_circuits)
+
+print("==================")
+print(station_info.get_station2station_info(api_key, "K08", "C05"))
+print(station_info.get_station2station_info(api_key, "C05", "C08"))
+
+print("==================")
+print(get_station_code("Mcpherson"))
+
+print(get_station_name("K08"))
